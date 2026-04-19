@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ap3
+
+  datasource:
+    url: jdbc:hsqldb:hsql://localhost:9001/mydb
+    username: sa
+    password:
