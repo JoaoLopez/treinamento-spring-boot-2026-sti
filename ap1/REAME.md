@@ -1,6 +1,7 @@
 ### Para executar o projeto siga os passos abaixo:
 
 ```bash
+cd ap1/
 mvn clean compile
 mvn exec:java -Dexec.mainClass="br.uff.sti.AppLombok"
 ```
