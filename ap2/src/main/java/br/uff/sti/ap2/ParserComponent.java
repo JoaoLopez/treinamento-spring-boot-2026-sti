@@ -9,6 +9,7 @@ import java.util.Map;
 
 @Component
 public class ParserComponent {
+    @Loga
     public String jsonToCsv(String json) {
 
         // Remove outer [ ]

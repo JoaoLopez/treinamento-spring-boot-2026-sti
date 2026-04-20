@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 @Component
 public class FileWriterComponent {
+    @Loga
     public void write(String path, String content) throws IOException {
         Files.writeString(Path.of(path), content);
     }
