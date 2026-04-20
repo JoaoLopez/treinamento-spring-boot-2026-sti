@@ -17,7 +17,7 @@ public class Ap22Application {
 			var parserComponent = context.getBean(ParserComponent.class);
 
 			try {
-				String json = fileReaderComponent.read("example_input.json");
+				String json = fileReaderComponent.read("input.json");
 				String csv = parserComponent.jsonToCsv(json);
 				fileWriterComponent.write("output.csv", csv);
 			} catch (IOException e) {
