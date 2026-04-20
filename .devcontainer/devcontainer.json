@@ -11,5 +11,6 @@
         "redhat.java"
       ]
     }
-  }
+  },
+  "forwardPorts": [9001]
 }
