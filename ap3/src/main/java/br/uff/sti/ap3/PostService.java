@@ -14,6 +14,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -86,6 +87,13 @@ public class PostService {
 
     public List<Post> getUltimosPostsPorTag(int num_posts, String tag) {
         return postRepository.findLastPostsByTagName(num_posts, tag);
+    }
+    
+    @Transactional(readOnly = true)
+    public void imprimirUltimosPostsEmStream(int num_posts) {
+        try (Stream<Post> posts = postRepository.streamLastPosts(num_posts)){
+            posts.forEach(System.out::println);
+        }
     }
 
     public void imprimirPosts(List<Post> posts) {

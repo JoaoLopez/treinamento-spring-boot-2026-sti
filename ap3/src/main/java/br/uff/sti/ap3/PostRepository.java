@@ -1,6 +1,7 @@
 package br.uff.sti.ap3;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,4 +21,7 @@ public interface PostRepository extends CrudRepository<Post, Long> {
         LIMIT :num_posts
     """)
     List<Post> findLastPostsByTagName(int num_posts, String tagName);
+
+    @Query("SELECT * FROM post ORDER BY data_postagem DESC LIMIT :num_posts")
+    Stream<Post> streamLastPosts(int num_posts);
 }

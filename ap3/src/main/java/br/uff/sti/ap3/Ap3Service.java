@@ -71,4 +71,11 @@ public class Ap3Service {
         postService.imprimirPosts(posts);
         System.out.println("==================================================================================\n");
     }
+
+    public void exercicio_5(){
+        System.out.println("\n==== Exercício 5: Pegue todos os últimos 15 posts da base, imprima eles no console, mas sem carregar todos para uma lista (use Stream). ====");
+        System.out.println("==== Imprimindo últimos 15 posts via Stream ====");
+        postService.imprimirUltimosPostsEmStream(15);
+        System.out.println("==================================================================================\n");
+    }
 }

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Ap3Application {
-
 	public static void main(String[] args) {
 		try(var context  = SpringApplication.run(Ap3Application.class, args)){
 
@@ -16,8 +15,7 @@ public class Ap3Application {
 			ap3Service.exercicio_2();
 			ap3Service.exercicio_3();
 			ap3Service.exercicio_4();
+			ap3Service.exercicio_5();
 		}
 	}
-
-
 }
