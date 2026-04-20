@@ -21,7 +21,7 @@ CREATE TABLE ap3.usuario(
 
 CREATE TABLE ap3.post(
      id              BIGINT          NOT NULL AUTO_INCREMENT,
-     data_postagem   DATE            NOT NULL,
+     data_postagem   TIMESTAMP       NOT NULL,
      mensagem        VARCHAR(2200)   NOT NULL,
      usuario_id      BIGINT          NOT NULL,
      CONSTRAINT PK_POST              PRIMARY KEY (id),
