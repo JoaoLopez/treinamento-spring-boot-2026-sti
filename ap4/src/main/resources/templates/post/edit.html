@@ -12,6 +12,10 @@
 <section class="container">
     <h1 th:text="${post.post.id} == null ? 'Novo Post' : 'Editar Post'" class="mt-5">Titulo</h1>
 
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+
     <form method="POST" action="#" th:action="@{/post}">
         <div class="d-flex justify-content-between mt-5">
             <div class="d-flex flex-column">

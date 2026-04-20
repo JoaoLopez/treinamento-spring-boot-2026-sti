@@ -9,6 +9,7 @@ import bt.uff.ap4.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.ui.Model;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,40 +29,46 @@ public class PostController {
     private final PostService postService;
     private final UsuarioRepository usuarioRepository;
 
+    @GetMapping
+    public ModelAndView list(){
+        val mv = new ModelAndView("post/list");
+        mv.addObject("posts", postService.findAll(Pageable.unpaged()));
+        return mv;
+    }
 
     @GetMapping("{id}")
     public ModelAndView get(@PathVariable Long id){
         val mv = new ModelAndView("post/get");
-
         mv.addObject("post", postService.findObyComUsuarioById(id));
-
         return mv;
     }
 
     @GetMapping("new")
     public ModelAndView novo(){
         val mv = new ModelAndView("post/edit");
-
         mv.addObject("post", new PostComUsuario(
                 new Post(null,null,null,null, List.of()),
                 new Usuario(null,null,null,0, null)));
-
         return mv;
     }
 
     @PostMapping
-    public String save(Post post){
-        log.info("Olha o post a ser salvo: {}", post);
-        val usuario = usuarioRepository.save(new Usuario(
-                null,
-                "Teste",
-                "Teste",
-                10,
-                "35frg5/f5rf6"
-        ));
-        val postSalvo = postService.save(post.withUsuarioId(usuario.id()));
+    public String save(Post post, Model model){
 
-        return "redirect:/post/" + postSalvo.id();
+        log.info("Olha o post a ser salvo: {}", post);
+
+        try {
+            //Assume que o usuário que cadastra um novo post é sempre o de ID = 1;
+            val usuarioId = 1L;
+            val postSalvo = postService.save(post.withUsuarioId(usuarioId));
+
+            return "redirect:/post/" + postSalvo.id();
+
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("post", new PostComUsuario(post, new Usuario(null, null, null, 0, null)));
+            model.addAttribute("error", e.getMessage());
+            return "post/edit";
+        }
     }
 
 //    @GetMapping("{id}/edit")
@@ -74,12 +81,7 @@ public class PostController {
 //    }
 
 
-    @GetMapping
-    public ModelAndView list(){
-        val mv = new ModelAndView("post/list");
-        mv.addObject("posts", postService.findAll(Pageable.unpaged()));
-        return mv;
-    }
+
 
 
 }

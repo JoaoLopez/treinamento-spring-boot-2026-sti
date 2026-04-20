@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -32,10 +33,18 @@ public class PostService {
         assert post.id() == null;
 
         post = post.withDataPostagem(LocalDateTime.now());
+        post = post.withTags(post.tags().stream()
+                                 .filter(tag -> tag != null)
+                                 .filter(tag -> tag.nome() != null && !tag.nome().isBlank())
+                                 .toList());
 
         final Set<ConstraintViolation<Post>> violations = validator.validate(post);
         if (!violations.isEmpty()) {
-            throw new IllegalArgumentException("Objeto inválido: " + violations);
+            String message = violations.stream()
+                                        .map(v -> v.getPropertyPath() + ": " + v.getMessage())
+                                        .collect(Collectors.joining(", "));
+
+            throw new IllegalArgumentException(message);
         }
 
         return postRepository.save(post);

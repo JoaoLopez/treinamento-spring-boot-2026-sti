@@ -1,5 +1,6 @@
 package bt.uff.ap4.modelo;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.With;
@@ -14,9 +15,17 @@ import java.util.List;
 @With
 public record Post(
         @Id Long id,
-        @NotNull LocalDateTime dataPostagem,
-        @Size(max=2000) String mensagem,
-        @NotNull Long usuarioId,
+
+        @NotNull(message = "Data de postagem é obrigatória")
+        LocalDateTime dataPostagem,
+
+        @NotBlank(message = "Mensagem é obrigatória")
+        @Size(max=2000)
+        String mensagem,
+
+        @NotNull(message = "Usuário é obrigatório")
+        Long usuarioId,
+
         @MappedCollection(idColumn = "post_id", keyColumn = "ordem")
         List<Tag> tags
 ) {
