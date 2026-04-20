@@ -34,6 +34,16 @@ public class PostService {
     }
 
     public Post criaUmPost(Usuario usuario) {
+        List<String> nomesTags = new ArrayList<>(List.of(
+            faker.verb().base(), 
+            faker.hacker().adjective(), 
+            faker.color().name()
+        ));
+
+        // Aleatoriamente inserindo tag "rpg" por conta do exercício 3 (50% de chance)
+        if (faker.random().nextInt(1, 100) <= 50)
+            nomesTags.add("rpg");
+
         val post = new Post(null,
                 faker.timeAndDate()
                      .past(30, TimeUnit.DAYS)
@@ -41,9 +51,7 @@ public class PostService {
                      .toLocalDateTime(),
                 faker.lorem().paragraph(2),
                 usuario.id(),
-                Tag.of(faker.verb().base(), 
-                       faker.hacker().adjective(), 
-                       faker.color().name()));
+                Tag.of(nomesTags.toArray(new String[0])));
 
         return selfProvider.getObject().save(post);
     }
@@ -63,6 +71,10 @@ public class PostService {
 
     public List<Post> getUltimosPostsUsuario(int num_posts, Usuario usuario){
         return postRepository.findLastPostsByUsuarioId(num_posts, usuario.id());
+    }
+
+    public List<Post> getUltimosPostsPorTag(int num_posts, String tag) {
+        return postRepository.findLastPostsByTagName(num_posts, tag);
     }
 
     public void imprimirPosts(List<Post> posts) {

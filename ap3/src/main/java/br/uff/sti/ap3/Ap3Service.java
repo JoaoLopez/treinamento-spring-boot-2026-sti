@@ -47,4 +47,16 @@ public class Ap3Service {
         postService.imprimirPosts(posts);
         System.out.println("==================================================================================\n");
     }
+
+    public void exercicio_3(){
+        val posts = postService.getUltimosPostsPorTag(10, "rpg");
+        imprimir_exercicio_3(posts);
+    }
+
+    private void imprimir_exercicio_3(List<Post> posts){
+        System.out.println("\n==== Exercício 3: Retorne os últimos 10 posts que tenham a tag \"rpg\". ====");
+        System.out.println("==== Últimos posts com a tag \"rpg\" ====");
+        postService.imprimirPosts(posts);
+        System.out.println("==================================================================================\n");
+    }
 }
