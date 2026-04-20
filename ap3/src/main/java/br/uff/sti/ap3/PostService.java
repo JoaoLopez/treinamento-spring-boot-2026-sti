@@ -44,12 +44,18 @@ public class PostService {
         if (faker.random().nextInt(1, 100) <= 50)
             nomesTags.add("rpg");
 
+
+        // Aleatoriamente inserindo mensagem com padrão "%orc%" por conta do exercício 4 (20% de chance)
+        String mensagem = "";
+        if (faker.random().nextInt(1, 100) <= 20)
+            mensagem = " Orcus ad portas est.";
+
         val post = new Post(null,
                 faker.timeAndDate()
                      .past(30, TimeUnit.DAYS)
                      .atZone(ZoneId.systemDefault())
                      .toLocalDateTime(),
-                faker.lorem().paragraph(2),
+                faker.lorem().paragraph(2) + mensagem,
                 usuario.id(),
                 Tag.of(nomesTags.toArray(new String[0])));
 
@@ -71,6 +77,11 @@ public class PostService {
 
     public List<Post> getUltimosPostsUsuario(int num_posts, Usuario usuario){
         return postRepository.findLastPostsByUsuarioId(num_posts, usuario.id());
+    }
+
+    public List<Post> getPostsPorPalavraChave(String palavra) {
+        String pattern = "%" + palavra + "%";
+        return postRepository.findByMensagemContaining(pattern);
     }
 
     public List<Post> getUltimosPostsPorTag(int num_posts, String tag) {

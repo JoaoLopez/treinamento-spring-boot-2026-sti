@@ -15,6 +15,7 @@ public class Ap3Application {
 			ap3Service.exercicio_1();
 			ap3Service.exercicio_2();
 			ap3Service.exercicio_3();
+			ap3Service.exercicio_4();
 		}
 	}
 

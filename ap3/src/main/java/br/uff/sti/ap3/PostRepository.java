@@ -9,6 +9,9 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     @Query("SELECT * FROM post WHERE usuario_id = :usuarioId ORDER BY data_postagem DESC LIMIT :num_posts")
     List<Post> findLastPostsByUsuarioId(int num_posts, Long usuarioId);
 
+    @Query("SELECT * FROM post WHERE LOWER(mensagem) LIKE LOWER(:pattern)")
+    List<Post> findByMensagemContaining(String pattern);
+
     @Query("""
         SELECT p.*
         FROM post p JOIN post_tag t ON p.id = t.post_id

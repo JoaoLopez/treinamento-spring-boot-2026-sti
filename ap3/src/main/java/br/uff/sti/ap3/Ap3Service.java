@@ -59,4 +59,16 @@ public class Ap3Service {
         postService.imprimirPosts(posts);
         System.out.println("==================================================================================\n");
     }
+
+    public void exercicio_4(){
+        val posts = postService.getPostsPorPalavraChave("orc");
+        imprimir_exercicio_4(posts);
+    }
+
+    private void imprimir_exercicio_4(List<Post> posts){
+        System.out.println("\n==== Exercício 4: Busque todos os posts que tenham as palavras “orc”. ====");
+        System.out.println("==== Posts com o pattern \"%orc%\" ====");
+        postService.imprimirPosts(posts);
+        System.out.println("==================================================================================\n");
+    }
 }
