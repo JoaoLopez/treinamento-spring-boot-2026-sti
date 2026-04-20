@@ -12,7 +12,7 @@ public class Ap3Application {
 
 			val ap3Service = context.getBean(Ap3Service.class);
 
-			ap3Service.exercicio_a();
+			ap3Service.exercicio_1();
 
 		}
 	}

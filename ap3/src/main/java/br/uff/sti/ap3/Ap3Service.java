@@ -4,42 +4,28 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 @Slf4j
 public class Ap3Service {
-
-    public static final String URL_IMAGEM_1 = "https://fastly.picsum.photos/id/872/200/200.jpg?hmac=m0AwAUFkEiEz2KW58n6a5RVkKaClHNylfppYjE3a0v4";
-    private final UsuarioDAO usuarioDAO;
+    private final UsuarioService usuarioService;
     private final PostService postService;
 
-    @Transactional
-    public void exercicio_a(){
-        val usuario = criaUsuario();
-
-        val post = new Post(null,
-                LocalDateTime.now(),
-                "Meu primeiro post!",
-                usuario.id(),
-                Tag.of("first", "java", "spring-boot"));
-
-        val postSalvo = postService.save(post);
-
-        log.info("post salvo: {}", postSalvo);
+    public void exercicio_1(){
+        val usuarios = usuarioService.criaUsuarios(5);
+        val posts = postService.criaPosts(30, usuarios);
+        imprimir_exercicio_1(usuarios, posts);
     }
 
-    @Transactional
-    public Usuario criaUsuario(){
-        return usuarioDAO.save(
-                new Usuario(null,
-                        "1234",
-                        "João Numerador",
-                        27,
-                        URL_IMAGEM_1)
-        );
+    public void imprimir_exercicio_1(List<Usuario> usuarios, List<Post> posts){
+        System.out.println("==== Exercício 1: Insira 30 posts aleatórios de 5 pessoas diferentes na base. ====");
+        System.out.println("==== Usuários inseridos ====");
+        usuarioService.imprimirUsuarios(usuarios);
+        System.out.println("==== Posts inseridos ====");
+        postService.imprimirPosts(posts);
+        System.out.println("==================================================================================");
     }
 }
