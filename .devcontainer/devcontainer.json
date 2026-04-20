@@ -12,5 +12,5 @@
       ]
     }
   },
-  "forwardPorts": [9001]
+  "forwardPorts": [8080, 9001]
 }
