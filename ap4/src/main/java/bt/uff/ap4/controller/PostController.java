@@ -71,17 +71,10 @@ public class PostController {
         }
     }
 
-//    @GetMapping("{id}/edit")
-//    public ModelAndView edit(@PathVariable Long id){
-//        val mv = new ModelAndView("post/edit");
-//
-//        mv.addObject("post", postService.findObyComUsuarioById(id));
-//
-//        return mv;
-//    }
-
-
-
-
-
+   @GetMapping("{id}/edit")
+   public ModelAndView edit(@PathVariable Long id){
+       val mv = new ModelAndView("post/edit");
+       mv.addObject("post", postService.findObyComUsuarioById(id));
+       return mv;
+   }
 }

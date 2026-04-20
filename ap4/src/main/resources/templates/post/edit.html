@@ -20,19 +20,19 @@
         <div class="d-flex justify-content-between mt-5">
             <div class="d-flex flex-column">
                 <label class="form-label" for="tag[0]">Tag 1:</label>
-                <input class="form-control" type="text" id="tag[0]" name="tags[0].nome">
+                <input class="form-control" type="text" id="tag[0]" name="tags[0].nome" th:value="${post.tags.size() > 0 ? post.tags[0].nome : ''}">
             </div>
             <div class="d-flex flex-column">
                 <label class="form-label" for="tag[1]">Tag 2:</label>
-                <input class="form-control" type="text" id="tag[1]" name="tags[1].nome">
+                <input class="form-control" type="text" id="tag[1]" name="tags[1].nome" th:value="${post.tags.size() > 1 ? post.tags[1].nome : ''}">
             </div>
             <div class="d-flex flex-column">
                 <label class="form-label" for="tag[2]">Tag 3:</label>
-                <input class="form-control" type="text" id="tag[2]" name="tags[2].nome">
+                <input class="form-control" type="text" id="tag[2]" name="tags[2].nome" th:value="${post.tags.size() > 2 ? post.tags[2].nome : ''}">
             </div>
             <div class="d-flex flex-column">
                 <label class="form-label" for="tag[3]">Tag 4:</label>
-                <input class="form-control" type="text" id="tag[3]" name="tags[3].nome">
+                <input class="form-control" type="text" id="tag[3]" name="tags[3].nome" th:value="${post.tags.size() > 3 ? post.tags[3].nome : ''}">
             </div>
         </div>
 
