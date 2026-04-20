@@ -61,6 +61,10 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    public List<Post> getUltimosPostsUsuario(int num_posts, Usuario usuario){
+        return postRepository.findLastPostsByUsuarioId(num_posts, usuario.id());
+    }
+
     public void imprimirPosts(List<Post> posts) {
         for (Post p : posts)
             System.out.println(p);

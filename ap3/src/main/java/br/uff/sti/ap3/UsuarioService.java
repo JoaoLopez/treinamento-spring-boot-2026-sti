@@ -36,8 +36,17 @@ public class UsuarioService {
         );
     }
 
+    public Usuario find(Long id) {
+        return usuarioDAO.findById(id)
+                         .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o ID: " + id));
+    }
+
     public void imprimirUsuarios(List<Usuario> usuarios) {
         for (Usuario u : usuarios)
-            System.out.println(u);
+            imprimirUmUsuario(u);
+    }
+
+    public void imprimirUmUsuario(Usuario usuario) {
+        System.out.println(usuario);
     }
 }
