@@ -5,28 +5,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title th:text="${post.post.id} == null ? 'Novo Post' : 'Editar Post'">Titulo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 <section class="container">
+    <h1 th:text="${post.post.id} == null ? 'Novo Post' : 'Editar Post'" class="mt-5">Titulo</h1>
 
     <form method="POST" action="#" th:action="@{/post}">
-        <h2 class="form-label">Mensagem</h2>
-        <textarea class="form-control" id="mensagem" name="mensagem" row="10" th:text="${post.mensagem}">
+        <div class="d-flex justify-content-between mt-5">
+            <div class="d-flex flex-column">
+                <label class="form-label" for="tag[0]">Tag 1:</label>
+                <input class="form-control" type="text" id="tag[0]" name="tags[0].nome">
+            </div>
+            <div class="d-flex flex-column">
+                <label class="form-label" for="tag[1]">Tag 2:</label>
+                <input class="form-control" type="text" id="tag[1]" name="tags[1].nome">
+            </div>
+            <div class="d-flex flex-column">
+                <label class="form-label" for="tag[2]">Tag 3:</label>
+                <input class="form-control" type="text" id="tag[2]" name="tags[2].nome">
+            </div>
+            <div class="d-flex flex-column">
+                <label class="form-label" for="tag[3]">Tag 4:</label>
+                <input class="form-control" type="text" id="tag[3]" name="tags[3].nome">
+            </div>
+        </div>
 
-    </textarea>
+        <label class="form-label mt-5" for="mensagem">Mensagem</label>
+        <textarea class="form-control" id="mensagem" name="mensagem" rows="10" th:text="${post.mensagem}"></textarea>
 
-        <h2>Tags</h2>
-        <label class="form-label" for="tag[0]">Tag 1:</label>
-        <input class="form-control" type="text" id="tag[0]" name="tags[0].nome">
-        <label class="form-label" for="tag[1]">Tag 2:</label>
-        <input class="form-control" type="text" id="tag[1]" name="tags[1].nome">
-        <label class="form-label" for="tag[2]">Tag 3:</label>
-        <input class="form-control" type="text" id="tag[2]" name="tags[2].nome">
-        <label class="form-label" for="tag[3]">Tag 4:</label>
-        <input class="form-control" type="text" id="tag[3]" name="tags[3].nome">
-        <input class="btn btn-primary" type="submit" value="Enviar">
+        <div class="d-flex justify-content-around mt-5">
+            <a th:href="@{/post}" class="btn btn-danger">Cancelar</a>
+            <input class="btn btn-success" type="submit" value="Salvar">
+        </div>
     </form>
     <!--    <pre th:text="${post.mensagem}">-->
     <!--        Atirei o pau no gato to to-->
